@@ -1,1 +1,1 @@
-# bind 'unix:/tmp/slack.sock'
+bind 'unix:/tmp/slack.sock'
