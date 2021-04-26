@@ -45,8 +45,8 @@ See [config/initializers/slack_ruby_bot_server.rb](config/initializers/slack_rub
 
 Set the _Request Url_ in your app's Features under _Event Subscriptions_, e.g. `https://79f0f6335438.ngrok.io/api/slack/event`. When you change this URL, Slack will `POST` a verification challenge to `/api/slack/event`, which should succeed.
 
-![](screenshots/events.png)
+![events](screenshots/events.png)
 
 Subscribe to `link_shared` events.
 
-![](screenshots/events-subscribe.png)
+![subscribe events](screenshots/event-subscribe.png)
