@@ -17,7 +17,7 @@ SlackRubyBotServer::Events.configure do |config|
           # }.map { |value| value[:details][0][:new_value]}
           # event.logger.info tags.to_json
           custom_fields = issue[:custom_fields].filter {
-            |elem| elem[:value] != ""
+            |elem| !elem[:value].empty?
           }.map {
             |elem| "#{elem[:name]}: #{elem[:value]}"
           }.join "\n"
