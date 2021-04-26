@@ -3,6 +3,17 @@ GEM
   specs:
     activemodel (6.0.3.2)
       activesupport (= 6.0.3.2)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
+    activerecord (6.0.3.2)
+      activemodel (= 6.0.3.2)
+      activesupport (= 6.0.3.2)
+    activeresource (5.1.1)
+      activemodel (>= 5.0, < 7)
+      activemodel-serializers-xml (~> 1.0)
+      activesupport (>= 5.0, < 7)
     activesupport (6.0.3.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -15,7 +26,6 @@ GEM
       console (~> 1.10)
       nio4r (~> 2.3)
       timers (~> 4.1)
-    bson (4.10.0)
     builder (3.2.4)
     capybara (3.33.0)
       addressable
@@ -82,6 +92,8 @@ GEM
       grape (~> 1.3)
     hashdiff (1.0.1)
     hashie (4.1.0)
+    hashie-forbidden_attributes (0.1.1)
+      hashie (>= 3.0)
     i18n (1.8.4)
       concurrent-ruby (~> 1.0)
     io-console (0.5.6)
@@ -94,18 +106,6 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
-    mongo (2.12.2)
-      bson (>= 4.8.2, < 5.0.0)
-    mongoid (7.1.2)
-      activemodel (>= 5.1, < 6.1)
-      mongo (>= 2.7.0, < 3.0.0)
-    mongoid-compatibility (0.5.1)
-      activesupport
-      mongoid (>= 2.0)
-    mongoid-scroll (0.3.6)
-      i18n
-      mongoid (>= 3.0)
-      mongoid-compatibility
     multi_json (1.15.0)
     multipart-post (2.1.1)
     mustermann (1.1.1)
@@ -119,6 +119,9 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    otr-activerecord (1.4.2)
+      activerecord (>= 4.0, < 6.3)
+      hashie-forbidden_attributes (~> 0.1)
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -140,6 +143,7 @@ GEM
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
+    rickshaw (0.5.0)
     roar (1.1.0)
       representable (~> 3.0.0)
     rspec (3.9.0)
@@ -184,6 +188,7 @@ GEM
       gli
       hashie
       websocket-driver
+    sqlite3 (1.4.2)
     thread_safe (0.3.6)
     timers (4.3.2)
     tzinfo (1.2.7)
@@ -205,21 +210,24 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord
+  activeresource
   capybara
   database_cleaner
   fabrication
   faker
   irb
-  mongoid
-  mongoid-scroll
   newrelic-slack-ruby-bot
+  otr-activerecord
   puma
   rack-test
   rake
+  rickshaw (~> 0.5.0)
   rspec
   selenium-webdriver
   slack-ruby-bot-server (>= 1.1.0)
   slack-ruby-bot-server-events
+  sqlite3
   vcr
   webmock
 
@@ -227,4 +235,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

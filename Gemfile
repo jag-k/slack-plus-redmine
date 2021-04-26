@@ -4,9 +4,13 @@ source 'https://rubygems.org'
 
 ruby '2.6.6'
 
+gem 'rickshaw', '~> 0.5.0'
 gem 'irb'
-gem 'mongoid'
-gem 'mongoid-scroll'
+gem 'activerecord', require: 'active_record'
+gem 'activeresource', require: 'active_resource'
+gem 'otr-activerecord'
+gem 'sqlite3'
+
 gem 'newrelic-slack-ruby-bot'
 gem 'puma'
 gem 'slack-ruby-bot-server', '>= 1.1.0'

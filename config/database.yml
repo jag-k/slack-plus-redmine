@@ -1,0 +1,17 @@
+default: &default
+  adapter: sqlite3
+  pool: 10
+  timeout: 5000
+  encoding: unicode
+
+development:
+  <<: *default
+  database: bot_development.sqlite3
+
+test:
+  <<: *default
+  database: bot_test.sqlite3
+
+production:
+  <<: *default
+  database: bot.sqlite3
