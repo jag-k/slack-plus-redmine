@@ -9,7 +9,7 @@ RSpec.configure do |config|
   end
 
   config.after :suite do
-    Mongoid.purge!
+    DatabaseCleaner.purge!
   end
 
   config.around :each do |example|
