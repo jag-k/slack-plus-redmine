@@ -26,7 +26,7 @@ end
 # @param [Numeric] issue_id
 # @return [Hash]
 def redmine_issue(issue_id)
-  (find "#{@domain}/issues/#{issue_id}.json")[:issue]
+  (find "#{@domain}/issues/#{issue_id}.json?include=journals,custom_fields")[:issue]
 end
 
 # @param [Numeric] user_id
