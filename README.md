@@ -1,9 +1,6 @@
 Slack :heart: RedMine
 ===================================
 
-## What is this?
-
-
 ## Running the Sample
 
 ### Settings
@@ -21,7 +18,7 @@ REDMINE_DOMAIN=https://demo.redmine.com
 REDMINE_TOKEN=...
 ```
 
-Get the values from from [your app's](https://api.slack.com/apps) _Basic Information_ settings.
+Get the values from [your app's](https://api.slack.com/apps) _Basic Information_ settings.
 
 Run `bundle install` and `foreman start`.
 
@@ -41,6 +38,12 @@ Copy the URL, e.g. `https://79f0f6335438.ngrok.io`, and use it as the prefix for
 
 See [config/initializers/slack_ruby_bot_server.rb](config/initializers/slack_ruby_bot_server.rb) for the required OAuth scopes. If you get `Slack::Web::Api::Errors::MissingScope: missing_scope` errors, you are missing a scope in your app configuration.
 
+![scopes](screenshots/scopes.png)
+
+Install bot to workspace and copy `Bot User OAuth Token` to `.env` (`SLACK_TOKEN`)
+
+![bot token](screenshots/bot-token.png)
+
 ### Events
 
 Set the _Request Url_ in your app's Features under _Event Subscriptions_, e.g. `https://79f0f6335438.ngrok.io/api/slack/event`. When you change this URL, Slack will `POST` a verification challenge to `/api/slack/event`, which should succeed.
@@ -50,3 +53,7 @@ Set the _Request Url_ in your app's Features under _Event Subscriptions_, e.g. `
 Subscribe to `link_shared` events.
 
 ![subscribe events](screenshots/event-subscribe.png)
+
+Add Your Redmine domain in _App unfurl domains_ 
+
+![img.png](screenshots/domains.png)
