@@ -3,24 +3,27 @@ require 'uri'
 require 'json'
 
 module Redmine
-  class RequestSender
-    TOKEN = ENV['REDMINE_TOKEN']
+  TOKEN = ENV['REDMINE_TOKEN']
+  DOMAIN = ENV['REDMINE_DOMAIN']
 
+  class RequestSender
+    # @param url [String] URL to request Redmine API
     def initialize(url)
-        @url = url
+      @url = url
     end
 
+    # @return [Hash] Result
     def call
-        uri = URI.parse(url)
+      uri = URI.parse(url)
 
-        request = Net::HTTP::Get.new(url)
-        request['X-Redmine-API-Key'] = TOKEN
-        request["Content-Type"] = "application/json"
+      request = Net::HTTP::Get.new(url)
+      request['X-Redmine-API-Key'] = TOKEN
+      request["Content-Type"] = "application/json"
 
-        Net::HTTP.start(uri.hostname, uri.port, :use_ssl => true) do |http|
-          response = http.request request
-          JSON.parse(response.body, { symbolize_names: true })
-        end
+      Net::HTTP.start(uri.hostname, uri.port, :use_ssl => true) do |http|
+        response = http.request request
+        JSON.parse(response.body, { symbolize_names: true })
+      end
     end
 
     private
