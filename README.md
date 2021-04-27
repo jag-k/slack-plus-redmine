@@ -1,7 +1,7 @@
 Slack :heart: RedMine
 ===================================
 
-## Running the Sample
+## Running App
 
 ### Settings
 
@@ -63,3 +63,10 @@ Subscribe to `link_shared` events.
 Add Your Redmine domain in _App unfurl domains_ 
 
 ![img.png](screenshots/domains.png)
+
+## TODO / Roadmap
+
+- [ ] Parse messages to find issue (`#123`) and add preview
+- [ ] Deploy on Heroku
+- [ ] Add setting in Slack, like _Redmine domain_ and _Redmine API key_
+- [ ] Link Slack users with Redmine users
