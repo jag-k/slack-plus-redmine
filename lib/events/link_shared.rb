@@ -12,23 +12,21 @@ SlackRubyBotServer::Events.configure do |config|
           issue = Redmine.issue issue_id
           assigned_to = Redmine.user issue[:assigned_to][:id]
 
-          tags = issue[:journals].map { |elem|
-            elem[:details].filter { |detail|
-              detail[:name] == "tag_list"
-            }.map { |value|
-              value[:new_value]
-            }
-          }.filter { |elem| elem.present? }.last
-
+          tags = issue[:journals].reduce do |memo, elem|
+            result = elem[:details].filter { |elem| elem[:name] == "tag_list" }.last
+            result.present? ? result[:new_value] : memo
+          end
           issue[:custom_fields].push({ name: "Tags", value: tags })
 
-          custom_fields_array = issue[:custom_fields].each_with_object([]) do |(name, value), acc|
+          custom_fields_array = issue[:custom_fields].each_with_object([]) do |elem, acc|
+            name, value = elem[:name], elem[:value]
             next if value.blank?
 
             field_value = if value.is_a?(Array)
                             value.join(', ')
                           elsif  name == REVIEWER
-                            "#{USERS_URL}#{value}" # как пример
+                            reviewer = Redmine.user value
+                            "<#{USERS_URL}#{value}|#{reviewer[:fist_name]} #{reviewer[:last_name]}>"
                           else
                             value
                           end
