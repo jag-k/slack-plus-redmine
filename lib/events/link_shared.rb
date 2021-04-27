@@ -22,13 +22,6 @@ SlackRubyBotServer::Events.configure do |config|
 
           issue[:custom_fields].push({ name: "Tags", value: tags })
 
-
-          custom_fields = issue[:custom_fields].filter {
-            |elem| elem[:value].present?
-          }.map {
-            |elem| "#{elem[:name]}: #{elem[:value].kind_of?(Array) ? elem[:value].join(', ') : elem[:value]}"
-          }.join "\n"
-
           custom_fields_array = issue[:custom_fields].each_with_object([]) do |(name, value), acc|
             next if value.blank?
 
