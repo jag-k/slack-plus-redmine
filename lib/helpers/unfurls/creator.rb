@@ -28,25 +28,8 @@ module Unfurls
         {
           url => {
             "blocks": [
-              {
-                "type": "header",
-                "text": {
-                  "type": "plain_text",
-                  "text": "##{issue_id}: #{issue[:subject]}"
-                }
-              },
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": fields
-                },
-                "accessory": {
-                  "type": "image",
-                  "image_url": assigned_to[:avatar],
-                  "alt_text": "Assigned to #{assigned_to[:name]}"
-                }
-              }
+              header(issue),
+              section(fields, assigned_to)
             ]
           }
         }.to_json
@@ -54,6 +37,34 @@ module Unfurls
     end
 
     private
+
+    # @param [Hash] issue Issue Hash-object
+    def header(issue)
+      {
+        "type": "header",
+        "text": {
+          "type": "plain_text",
+          "text": "##{issue[:id]}: #{issue[:subject]}"
+        }
+      }
+    end
+
+    # @param [Array<Hash>] fields Fields to Markdown
+    # @param [Hash] assigned_to Redmine User
+    def section(fields, assigned_to)
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": fields
+        },
+        "accessory": {
+          "type": "image",
+          "image_url": assigned_to[:avatar],
+          "alt_text": "Assigned to #{assigned_to[:name]}"
+        }
+      }
+    end
 
     attr_reader :url
   end
