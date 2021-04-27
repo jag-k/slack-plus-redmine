@@ -4,14 +4,11 @@ ISSUE_URL = "#{REDMINE_DOMAIN}/issues/"
 SlackRubyBotServer::Events.configure do |config|
   config.on :event, 'event_callback', 'link_shared' do |event|
     event[:event][:links].each do |link|
-      event.logger.info link[:url]
-      event.logger.info link[:url].start_with? ISSUE_URL
       if link[:url].start_with? ISSUE_URL
         issue_id = link[:url].slice(ISSUE_URL.length..link[:url].length).split(/\//)[0]
-        event.logger.info issue_id
         if issue_id.is_i?
-          issue = redmine_issue issue_id
-          assigned_to = redmine_user issue[:assigned_to][:id]
+          issue = Redmine::issue issue_id
+          assigned_to = Redmine::user issue[:assigned_to][:id]
           # tags = issue[:journals].filter  { |elem|
           #   elem[:details][0][:name] == "tag_list"
           # }.map { |value| value[:details][0][:new_value]}

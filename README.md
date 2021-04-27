@@ -5,7 +5,7 @@ Slack :heart: RedMine
 
 ### Settings
 
-Create `.env` file with the following settings.
+Create [`.env`](/.env.sample) file with the following settings.
 
 ```
 SLACK_CLIENT_ID=...
@@ -24,6 +24,8 @@ Run `bundle install` and `foreman start`.
 
 ### Install App
 
+#### Local development
+
 Register your app via OAuth workflow from [localhost:5000](http://localhost:5000).
 
 Expose the local server port `5000` to receive Slack events using [ngrok](https://ngrok.com).
@@ -33,6 +35,10 @@ ngrok http 5000
 ```
 
 Copy the URL, e.g. `https://79f0f6335438.ngrok.io`, and use it as the prefix for your events, slash commands, and interactive message buttons.
+
+#### Server installation
+
+Add `RACK_ENV=production` in [`.env`](/.env) file
 
 ### OAuth Scopes
 
