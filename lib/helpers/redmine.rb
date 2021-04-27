@@ -2,13 +2,13 @@ require 'net/https'
 require 'uri'
 require 'json'
 
-module Redmine
+class Redmine
   @domain = ENV['REDMINE_DOMAIN']
   @token = ENV['REDMINE_TOKEN']
 
   # @param [String] url
   # @return [Hash]
-  def find(url)
+  private_class_method def self.find(url)
     uri = URI.parse(url)
     request = Net::HTTP::Get.new(url)
 
@@ -23,13 +23,13 @@ module Redmine
 
   # @param [Numeric] issue_id
   # @return [Hash]
-  def issue(issue_id)
+  def self.issue(issue_id)
     (find "#{@domain}/issues/#{issue_id}.json?include=journals,custom_fields")[:issue]
   end
 
   # @param [Numeric] user_id
   # @return [Hash]
-  def user(user_id)
+  def self.user(user_id)
     (find "#{@domain}/users/#{user_id}.json")[:user]
   end
 end

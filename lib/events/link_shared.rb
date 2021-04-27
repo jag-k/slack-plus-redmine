@@ -7,8 +7,8 @@ SlackRubyBotServer::Events.configure do |config|
       if link[:url].start_with? ISSUE_URL
         issue_id = link[:url].slice(ISSUE_URL.length..link[:url].length).split(/\//)[0]
         if issue_id.is_i?
-          issue = Redmine::issue issue_id
-          assigned_to = Redmine::user issue[:assigned_to][:id]
+          issue = Redmine.issue issue_id
+          assigned_to = Redmine.user issue[:assigned_to][:id]
           # tags = issue[:journals].filter  { |elem|
           #   elem[:details][0][:name] == "tag_list"
           # }.map { |value| value[:details][0][:new_value]}
