@@ -9,14 +9,23 @@ SlackRubyBotServer::Events.configure do |config|
         if issue_id.is_i?
           issue = Redmine.issue issue_id
           assigned_to = Redmine.user issue[:assigned_to][:id]
-          # tags = issue[:journals].filter  { |elem|
-          #   elem[:details][0][:name] == "tag_list"
-          # }.map { |value| value[:details][0][:new_value]}
-          # event.logger.info tags.to_json
+
+          issue[:custom_fields].push(
+            {
+              name: "Tags",
+              value: issue[:journals].map { |elem|
+                elem[:details].filter { |detail|
+                  detail[:name] == "tag_list"
+                }.map { |value|
+                  value[:new_value]
+                }
+              }.filter { |elem| elem.present? }.last
+            }
+          )
           custom_fields = issue[:custom_fields].filter {
             |elem| elem[:value].present?
           }.map {
-            |elem| "#{elem[:name]}: #{elem[:value]}"
+            |elem| "#{elem[:name]}: #{elem[:value].kind_of?(Array) ? elem[:value].join(', ') : elem[:value]}"
           }.join "\n"
 
           unfurls = {
