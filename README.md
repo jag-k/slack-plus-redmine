@@ -1,5 +1,16 @@
-Slack :heart: RedMine
+Slack :heart: Redmine
 ===================================
+
+Look your Redmine Issues in Slack!
+
+![Preview 1](screenshots/screen_1.png)
+![Preview 2](screenshots/screen_2.png)
+
+## Features
+
+- Add link preview
+- Support custom fields
+- Add Assigned To avatar
 
 ## Running the Sample
 
