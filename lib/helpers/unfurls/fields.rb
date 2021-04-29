@@ -21,7 +21,7 @@ module Unfurls
                         value
                       end
 
-        acc << "#{name}: #{field_value}"
+        acc << "*#{name}*: #{field_value}"
       end.join("\n")
     end
 

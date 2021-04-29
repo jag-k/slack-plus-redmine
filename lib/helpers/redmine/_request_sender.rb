@@ -20,9 +20,13 @@ module Redmine
       request['X-Redmine-API-Key'] = TOKEN
       request["Content-Type"] = "application/json"
 
-      Net::HTTP.start(uri.hostname, uri.port, :use_ssl => true) do |http|
-        response = http.request request
-        JSON.parse(response.body, { symbolize_names: true })
+      begin
+        Net::HTTP.start(uri.hostname, uri.port, :use_ssl => true) do |http|
+          response = http.request request
+          JSON.parse(response.body, { symbolize_names: true })
+        end
+      ensure
+        return
       end
     end
 
