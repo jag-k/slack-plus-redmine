@@ -15,15 +15,15 @@ module Redmine
       url = "#{USERS_URL}#{user_id}.json"
       redmine_response = Redmine::RequestSender.new(url).call
       if redmine_response.present?
-      user = redmine_response[:user]
+        user = redmine_response[:user]
 
-      user[:name] = user[:firstname].present? ? "#{user[:firstname]} #{user[:lastname]}" : user[:login]
-      user[:mail] = user[:mail].present? ? user[:mail] : "#{user[:login]}@#{MAIL_DOMAIN}"
-      user[:link] = "<#{Redmine::USERS_URL}#{user[:id]}|#{user[:name]}>"
-      user[:avatar] = "https://www.gravatar.com/avatar/#{user[:mail].downcase.to_md5}?rating=PG&size=100&default=monsterid"
-      user
+        user[:name] = user[:firstname].present? ? "#{user[:firstname]} #{user[:lastname]}" : user[:login]
+        user[:mail] = user[:mail].present? ? user[:mail] : "#{user[:login]}@#{MAIL_DOMAIN}"
+        user[:link] = "<#{Redmine::USERS_URL}#{user[:id]}|#{user[:name]}>"
+        user[:avatar] = "https://www.gravatar.com/avatar/#{user[:mail].downcase.to_md5}?rating=PG&size=100&default=monsterid"
+        user
       else
-        {}
+        { }
       end
     end
 

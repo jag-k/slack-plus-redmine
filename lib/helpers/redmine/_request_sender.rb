@@ -23,9 +23,9 @@ module Redmine
       begin
         Net::HTTP.start(uri.hostname, uri.port, :use_ssl => true) do |http|
           response = http.request request
-          JSON.parse(response.body, { symbolize_names: true })
+          return JSON.parse(response.body, { symbolize_names: true })
         end
-      ensure
+      rescue JSON::ParseException
         return
       end
     end

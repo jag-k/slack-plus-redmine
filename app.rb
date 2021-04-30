@@ -4,6 +4,10 @@ ENV['RACK_ENV'] ||= 'development'
 
 Bundler.require :default
 
+Dir[File.expand_path('config/database_tables', __dir__) + '/**/*.rb'].sort.each do |file|
+  require file
+end
+
 Dir[File.expand_path('config/initializers', __dir__) + '/**/*.rb'].sort.each do |file|
   require file
 end

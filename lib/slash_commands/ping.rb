@@ -10,7 +10,8 @@ SlackRubyBotServer::Events.configure do |config|
       if redmine_user.empty?
         { text: "User with id <#{Redmine::USERS_URL}#{text}|#{text}> not found!" }
       else
-        user = User.new(slack_id: command[:user_id], name: command[:user_name], redmine_id: redmine_user[:id])
+          user = User.new(slack_id: command[:user_id], name: command[:user_name], redmine_id: redmine_user[:id])
+        command.logger.info user
         { text: "You (@#{user[:slack_id]}) be associated with Redmine user #{redmine_user[:name]}" }
       end
     else
